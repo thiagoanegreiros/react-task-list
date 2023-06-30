@@ -1,11 +1,14 @@
 import list from './list.module.scss'
+import Item from './item'
+import { useState } from 'react'
 
-type ListItem = {
+export type ListItem = {
     task: string,
     time: number
 }
+
 function List() {
-    const tasks: ListItem[] = [
+    let [tasks, setTasks] = useState([
         {
             task: 'React',
             time: 2
@@ -14,16 +17,16 @@ function List() {
             task: 'JS',
             time: 1
         }
-    ]
+    ])
     return(
         <aside className={list.listaTarefas} >
-            <h2>Estudos do dia</h2>
+            <h2 onClick={() => {
+                console.log('h2 click')
+                setTasks([...tasks, { task: 'Estudar estado', time: 3 }])
+            }}>Estudos do dia</h2>
             <ul>
                 {tasks.map((item, index) => (
-                    <li key={index} className={list.item}>
-                        <h3>{item.task}</h3>
-                        <span>{`0${item.time}:00:00`}</span>
-                    </li>
+                    <Item index={index} item={item} />
                 ))}
             </ul>
         </aside>
