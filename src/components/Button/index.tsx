@@ -1,11 +1,15 @@
-import React from "react";
+import React from 'react'
 import button from './button.module.scss'
 
-class Button extends React.Component<{ children: string }> {
+class Button extends React.Component<{
+    type?: 'button' | 'submit' | 'reset' | undefined
+    children: string
+}> {
     render() {
+        const { children, type = 'button' } = this.props
         return (
-            <button className={button.botao}>
-                { this.props.children }
+            <button type={type} className={button.botao}>
+                { children }
             </button>
         )
     }
