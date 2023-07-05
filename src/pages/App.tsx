@@ -7,11 +7,19 @@ import { Task } from '../types/task';
 
 function App() {
   let [tasks, setTasks] = useState<Task[]>([])
+  const [selected, setSelected] = useState<Task>();
+  function selectTask(selectedTask: Task) {
+    setSelected(selectedTask)
+    setTasks((last) => last.map((i) => ({
+      ...i,
+      selected: i.id === selectedTask.id
+    })))
+  }
   return (
     <div className={app.AppStyle}>
       <Form setTasks={setTasks} />
-      <List tasks={tasks} />
-      <Cronometer />
+      <List tasks={tasks} selectTask={selectTask} />
+      <Cronometer selected={selected} />
     </div>
   );
 }

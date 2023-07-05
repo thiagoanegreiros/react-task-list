@@ -1,9 +1,18 @@
 import { Task } from '../../../types/task'
-import list from '../list.module.scss'
+import list from './item.module.scss'
 
-export default function Item( { index, item }: { index: number, item: Task }) {
+type Props = {
+    item: Task
+    selectTask: (task: Task) => void
+}
+
+export default function Item( { item, selectTask }: Props) {
     return (
-        <li key={index} className={list.item}>
+        <li
+            onClick={() => selectTask(item)}
+            key={item.id}
+            className={`${list.item} ${item.selected ? list.itemSelecionado: ''}`}
+        >
         <h3>{item.task}</h3>
         <span>{`${item.time}`}</span>
     </li>

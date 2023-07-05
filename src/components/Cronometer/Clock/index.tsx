@@ -1,3 +1,4 @@
+import { Task } from '../../../types/task'
 import style from './clock.module.scss'
 
 export default function Clock() {
